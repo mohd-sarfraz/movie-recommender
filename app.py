@@ -101,14 +101,13 @@ API_KEY = "2a9fc974340355f82a30d60bf0d39e11"
 
 # ================= FETCH MOVIE DATA =================
 
+@st.cache_data
 def fetch_movie_data(movie_id):
 
     try:
-
         url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={API_KEY}"
 
         response = requests.get(url, timeout=10)
-
         data = response.json()
 
         poster_path = data.get("poster_path")
@@ -126,13 +125,35 @@ def fetch_movie_data(movie_id):
         }
 
     except:
-
         return {
             "poster": None,
             "rating": "N/A",
             "release": "N/A",
             "overview": "No description available."
         }
+
+# ================= FETCH TRAILER =================
+
+@st.cache_data
+def fetch_trailer(movie_id):
+
+    try:
+        url = f"https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key={API_KEY}"
+
+        data = requests.get(url, timeout=10).json()
+
+        for video in data.get("results", []):
+
+            if (
+                video.get("site") == "YouTube"
+                and video.get("type") == "Trailer"
+            ):
+                return f"https://www.youtube.com/watch?v={video['key']}"
+
+        return None
+
+    except:
+        return None
 
 # ================= RECOMMEND FUNCTION =================
 
@@ -160,7 +181,8 @@ def recommend(movie):
             "title": movies.iloc[i[0]].title,
             "poster": movie_data["poster"],
             "rating": movie_data["rating"],
-            "release": movie_data["release"]
+            "release": movie_data["release"],
+            "similarity": round(float(i[1]) * 100, 2)
         })
 
     return recommendations
@@ -236,12 +258,20 @@ try:
             selected_movie_data["overview"]
         )
 
-except:
+        trailer_url = fetch_trailer(selected_movie_id)
+
+        if trailer_url:
+            st.link_button(
+                "▶️ Watch Trailer",
+                trailer_url
+            )
+
+except Exception:
     pass
 
 st.write("")
 
-# ================= BUTTON =================
+# ================= RECOMMEND BUTTON =================
 
 if st.button("🔥 Recommend Similar Movies"):
 
@@ -270,7 +300,7 @@ if st.button("🔥 Recommend Similar Movies"):
             )
 
             st.markdown(
-                f"<div class='rating'>⭐ {movie['rating']}</div>",
+                f"<div class='rating'>🎯 Match {movie['similarity']}%</div>",
                 unsafe_allow_html=True
             )
 
@@ -288,7 +318,8 @@ st.markdown(
     """
     <hr>
     <center>
-    Built with ❤️ using Python, Streamlit, Scikit-Learn & TMDB API
+    Built with ❤️ by Mohammad Sarfraz Alam |
+    Python • Streamlit • Scikit-Learn • TMDB API
     </center>
     """,
     unsafe_allow_html=True

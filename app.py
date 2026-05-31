@@ -177,14 +177,16 @@ def recommend(movie):
 
         movie_data = fetch_movie_data(movie_id)
 
-    recommendations.append({
-    "movie_id": movie_id,
-    "title": movies.iloc[i[0]].title,
-    "poster": movie_data["poster"],
-    "rating": movie_data["rating"],
-    "release": movie_data["release"],
-    "similarity": round(float(i[1]) * 100, 2)
-    })
+        recommendations.append({
+            "movie_id": movie_id,
+            "title": movies.iloc[i[0]].title,
+            "poster": movie_data["poster"],
+            "rating": movie_data["rating"],
+            "release": movie_data["release"],
+            "similarity": round(float(i[1]) * 100, 2)
+        })
+
+    st.write("Total Recommendations:", len(recommendations))
 
     return recommendations
 
@@ -277,11 +279,14 @@ st.write("")
 if st.button("🔥 Recommend Similar Movies"):
 
     with st.spinner("Finding Similar Movies..."):
+
         recommendations = recommend(selected_movie)
 
     st.subheader(
         f"🎬 Recommended Movies for '{selected_movie}'"
     )
+
+    st.write("Total Recommendations:", len(recommendations))
 
     col1, col2, col3, col4, col5 = st.columns(5)
 

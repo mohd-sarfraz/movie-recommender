@@ -177,13 +177,14 @@ def recommend(movie):
 
         movie_data = fetch_movie_data(movie_id)
 
-        recommendations.append({
-            "title": movies.iloc[i[0]].title,
-            "poster": movie_data["poster"],
-            "rating": movie_data["rating"],
-            "release": movie_data["release"],
-            "similarity": round(float(i[1]) * 100, 2)
-        })
+    recommendations.append({
+    "movie_id": movie_id,
+    "title": movies.iloc[i[0]].title,
+    "poster": movie_data["poster"],
+    "rating": movie_data["rating"],
+    "release": movie_data["release"],
+    "similarity": round(float(i[1]) * 100, 2)
+    })
 
     return recommendations
 
@@ -287,27 +288,42 @@ if st.button("🔥 Recommend Similar Movies"):
 
     cols = [col1, col2, col3, col4, col5]
 
-    for idx, movie in enumerate(recommendations):
+for idx, movie in enumerate(recommendations):
 
-        with cols[idx]:
+    with cols[idx]:
 
-            if movie["poster"]:
-                st.image(movie["poster"])
+        if movie["poster"]:
+            st.image(movie["poster"])
 
-            st.markdown(
-                f"<div class='movie-title'>{movie['title']}</div>",
-                unsafe_allow_html=True
+        st.markdown(
+            f"<div class='movie-title'>{movie['title']}</div>",
+            unsafe_allow_html=True
+        )
+
+        st.markdown(
+            f"<div class='rating'>🎯 Match {movie['similarity']}%</div>",
+            unsafe_allow_html=True
+        )
+
+        st.markdown(
+            f"<div class='release'>📅 {movie['release']}</div>",
+            unsafe_allow_html=True
+        )
+
+        trailer_url = fetch_trailer(movie["movie_id"])
+
+        if trailer_url:
+            st.link_button(
+                "▶️ Trailer",
+                trailer_url,
+                use_container_width=True
             )
 
-            st.markdown(
-                f"<div class='rating'>🎯 Match {movie['similarity']}%</div>",
-                unsafe_allow_html=True
-            )
-
-            st.markdown(
-                f"<div class='release'>📅 {movie['release']}</div>",
-                unsafe_allow_html=True
-            )
+        st.link_button(
+            "🎬 Details",
+            f"https://www.themoviedb.org/movie/{movie['movie_id']}",
+            use_container_width=True
+        )
 
 # ================= FOOTER =================
 

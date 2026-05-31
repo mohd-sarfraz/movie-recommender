@@ -277,7 +277,6 @@ st.write("")
 if st.button("🔥 Recommend Similar Movies"):
 
     with st.spinner("Finding Similar Movies..."):
-
         recommendations = recommend(selected_movie)
 
     st.subheader(
@@ -288,42 +287,42 @@ if st.button("🔥 Recommend Similar Movies"):
 
     cols = [col1, col2, col3, col4, col5]
 
-for idx, movie in enumerate(recommendations):
+    for idx, movie in enumerate(recommendations):
 
-    with cols[idx]:
+        with cols[idx]:
 
-        if movie["poster"]:
-            st.image(movie["poster"])
+            if movie["poster"]:
+                st.image(movie["poster"])
 
-        st.markdown(
-            f"<div class='movie-title'>{movie['title']}</div>",
-            unsafe_allow_html=True
-        )
-
-        st.markdown(
-            f"<div class='rating'>🎯 Match {movie['similarity']}%</div>",
-            unsafe_allow_html=True
-        )
-
-        st.markdown(
-            f"<div class='release'>📅 {movie['release']}</div>",
-            unsafe_allow_html=True
-        )
-
-        trailer_url = fetch_trailer(movie["movie_id"])
-
-        if trailer_url:
-            st.link_button(
-                "▶️ Trailer",
-                trailer_url,
-                use_container_width=True
+            st.markdown(
+                f"<div class='movie-title'>{movie['title']}</div>",
+                unsafe_allow_html=True
             )
 
-        st.link_button(
-            "🎬 Details",
-            f"https://www.themoviedb.org/movie/{movie['movie_id']}",
-            use_container_width=True
-        )
+            st.markdown(
+                f"<div class='rating'>🎯 Match {movie['similarity']}%</div>",
+                unsafe_allow_html=True
+            )
+
+            st.markdown(
+                f"<div class='release'>📅 {movie['release']}</div>",
+                unsafe_allow_html=True
+            )
+
+            trailer_url = fetch_trailer(movie["movie_id"])
+
+            if trailer_url:
+                st.link_button(
+                    "▶️ Trailer",
+                    trailer_url,
+                    use_container_width=True
+                )
+
+            st.link_button(
+                "🎬 Details",
+                f"https://www.themoviedb.org/movie/{movie['movie_id']}",
+                use_container_width=True
+            )
 
 # ================= FOOTER =================
 

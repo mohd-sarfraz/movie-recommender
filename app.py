@@ -97,7 +97,7 @@ similarity = pickle.load(open('similarity.pkl', 'rb'))
 
 # ================= TMDB API =================
 
-API_KEY = "2a9fc974340355f82a30d60bf0d39e11"
+API_KEY = st.secrets["TMDB_API_KEY"]
 
 # ================= FETCH MOVIE DATA =================
 

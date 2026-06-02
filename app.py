@@ -16,51 +16,108 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-.main {
-    background-color: #0e1117;
+/* Background */
+.stApp {
+    background: linear-gradient(
+        135deg,
+        #000814 0%,
+        #001d3d 40%,
+        #003566 100%
+    );
+    color: white;
 }
 
+/* Main Container */
 .block-container {
     padding-top: 2rem;
+    padding-bottom: 2rem;
+    max-width: 1200px;
 }
 
+/* Title */
 h1 {
     text-align: center;
-    color: #E50914;
+    color: #FFD60A;
+    font-size: 4rem !important;
+    font-weight: 900;
+    margin-bottom: 10px;
 }
 
+/* Movie Cards */
 .movie-title {
     text-align: center;
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 18px;
+    font-weight: 700;
     color: white;
     margin-top: 10px;
 }
 
 .rating {
     text-align: center;
-    color: gold;
+    color: #FFD60A;
     font-weight: bold;
+    font-size: 16px;
 }
 
 .release {
     text-align: center;
-    color: lightgray;
+    color: #cbd5e1;
 }
 
-.stButton > button {
-    background-color: #E50914;
+/* Select Box */
+div[data-baseweb="select"] > div {
+    background-color: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 15px;
+}
+
+/* Text Input */
+.stTextInput input {
+    background-color: rgba(255,255,255,0.08);
     color: white;
-    border-radius: 10px;
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* Metrics */
+[data-testid="metric-container"] {
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+/* Buttons */
+.stButton > button {
+    background: linear-gradient(
+        90deg,
+        #FFD60A,
+        #FFC300
+    );
+    color: black;
+    border: none;
+    border-radius: 15px;
     width: 100%;
-    height: 3em;
+    height: 3.3em;
     font-size: 18px;
     font-weight: bold;
+    transition: all 0.3s ease;
 }
 
 .stButton > button:hover {
-    background-color: #b20710;
-    color: white;
+    transform: scale(1.03);
+    box-shadow: 0 0 20px #FFD60A;
+}
+
+/* Images */
+img {
+    border-radius: 18px;
+}
+
+/* Footer */
+footer {
+    visibility: hidden;
 }
 
 </style>
@@ -192,20 +249,19 @@ def recommend(movie):
 
 # ================= TITLE =================
 
-st.title("🎬 WatchNext")
+st.markdown("""
+<h1 style='text-align:center;color:white;font-size:65px;font-weight:800;'>
+🎬 WatchNext
+</h1>
 
-st.markdown(
-    """
-    <h3 style='text-align:center; color:#E50914;'>
-    Find Your Next Favorite Movie with AI
-    </h3>
-    """,
-    unsafe_allow_html=True
-)
+<h3 style='text-align:center;color:#60A5FA;'>
+Your Personal AI Movie Discovery Engine
+</h3>
 
-st.info(
-    "🍿 Discover movies you'll love with AI-powered recommendations, ratings, trailers and movie details."
-)
+<p style='text-align:center;font-size:20px;color:#D1D5DB;'>
+Discover hidden gems, blockbuster hits, trailers and personalized recommendations instantly.
+</p>
+""", unsafe_allow_html=True)
 
 st.write("")
 

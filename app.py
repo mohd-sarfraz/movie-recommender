@@ -480,7 +480,63 @@ except Exception:
 
 st.write("")
 
+# ================= RECOMMEND BUTTON =================
 
+if st.button("🍿 Find My Next Movie"):
+
+    if selected_movie is None:
+        st.warning("⚠️ Please select a movie first.")
+        st.stop()
+
+    with st.spinner("🔍 Finding the best movies for you..."):
+        recommendations = recommend(selected_movie)
+
+    st.subheader(
+        f"✨ Movies You May Love Based On '{selected_movie}'"
+    )
+
+    st.write(f"🎬 Found {len(recommendations)} recommendations")
+
+    col1, col2, col3, col4, col5 = st.columns(5)
+
+    cols = [col1, col2, col3, col4, col5]
+
+    for idx, movie in enumerate(recommendations):
+
+        with cols[idx]:
+
+            if idx == 0:
+                st.success("🏆 TOP PICK")
+
+            if movie["poster"]:
+                st.image(movie["poster"])
+
+            st.markdown(
+                f"""
+                <div class='movie-card'>
+                    <div class='movie-title'>{movie['title']}</div>
+                    <div class='rating'>⭐ Rating: {movie['rating']}</div>
+                    <div class='rating'>🎯 Match: {movie['similarity']}%</div>
+                    <div class='release'>📅 {movie['release']}</div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+            trailer_url = fetch_trailer(movie["movie_id"])
+
+            if trailer_url:
+                st.link_button(
+                    "▶️ Trailer",
+                    trailer_url,
+                    use_container_width=True
+                )
+
+            st.link_button(
+                "🎬 Details",
+                f"https://www.themoviedb.org/movie/{movie['movie_id']}",
+                use_container_width=True
+            )
 # ================= FOOTER =================
 
 st.markdown("""

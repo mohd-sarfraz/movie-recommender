@@ -125,13 +125,42 @@ div[data-baseweb="select"] * {
 
 /* ================= METRIC CARDS ================= */
 
+/* ================= METRIC CARDS ================= */
+
 [data-testid="metric-container"] {
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(20px);
-    border-radius: 22px;
-    padding: 25px;
-    border: 1px solid rgba(255,214,10,0.18);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 20px;
+    min-height: 120px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+[data-testid="metric-container"]:hover {
+    transform: translateY(-3px);
+    border: 1px solid rgba(255,214,10,0.35);
+    box-shadow: 0 0 15px rgba(255,214,10,0.15);
+}
+
+[data-testid="metric-container"] label {
+    font-size: 15px !important;
+    font-weight: 600;
+    text-align: center !important;
+}
+
+[data-testid="metric-container"] [data-testid="stMetricValue"] {
+    color: #FFD60A;
+    font-size: 32px !important;
+    font-weight: 800;
+    text-align: center !important;
 }
 
 /* ================= SIDEBAR ================= */
@@ -396,15 +425,13 @@ font-weight:bold;
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.metric("Movies Available", len(movies))
+    st.metric("🎬 Movies", f"{len(movies)}")
 
 with col2:
-    st.metric("Algorithm", "Content-Based")
+    st.metric("🧠 Algorithm", "Content-Based")
 
 with col3:
-    st.metric("Recommendations", "Top 5")
-
-st.write("")
+    st.metric("⭐ Top Picks", "5")
 
 # ================= MOVIE SELECTION =================
 selected_movie = st.selectbox(

@@ -22,8 +22,8 @@ st.markdown("""
     background:
     linear-gradient(
     linear-gradient(
-      rgba(0,0,0,0.82),
-      rgba(0,0,0,0.92)
+rgba(2,6,23,0.75)
+rgba(2,6,23,0.85)
 )
     ),
     url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba");

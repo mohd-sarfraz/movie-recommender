@@ -21,8 +21,10 @@ st.markdown("""
 .stApp {
     background:
     linear-gradient(
-        rgba(2,6,23,0.92),
-        rgba(2,6,23,0.96)
+    linear-gradient(
+      rgba(0,0,0,0.82),
+      rgba(0,0,0,0.92)
+)
     ),
     url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba");
     background-size: cover;
@@ -123,7 +125,6 @@ div[data-baseweb="select"] * {
     backdrop-filter: blur(10px);
 }
 
-/* ================= METRIC CARDS ================= */
 
 /* ================= METRIC CARDS ================= */
 

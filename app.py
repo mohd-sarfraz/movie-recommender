@@ -192,11 +192,19 @@ def recommend(movie):
 
 # ================= TITLE =================
 
-st.title("🍿 Netflix Style Movie Recommendation System")
+st.title("🎬 WatchNext")
 
 st.markdown(
-    "<h4 style='text-align:center;'>AI Powered Content-Based Recommendation Engine</h4>",
+    """
+    <h3 style='text-align:center; color:#E50914;'>
+    Find Your Next Favorite Movie with AI
+    </h3>
+    """,
     unsafe_allow_html=True
+)
+
+st.info(
+    "🍿 Discover movies you'll love with AI-powered recommendations, ratings, trailers and movie details."
 )
 
 st.write("")

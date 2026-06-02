@@ -34,7 +34,7 @@ st.markdown("""
 /* ================= MAIN CONTAINER ================= */
 
 .block-container {
-    padding-top: 4.5rem;   /* Changed from 1rem */
+    padding-top: 4.5rem;
     padding-bottom: 2rem;
     max-width: 1300px;
 }
@@ -62,16 +62,14 @@ h1 {
     margin-top: 12px;
     margin-bottom: 12px;
     text-align: center;
-    box-shadow:
-        0 10px 30px rgba(0,0,0,0.4);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
     transition: all 0.3s ease;
 }
 
 .movie-card:hover {
     transform: translateY(-5px);
     border: 1px solid rgba(255,214,10,0.4);
-    box-shadow:
-        0 0 25px rgba(255,214,10,0.25);
+    box-shadow: 0 0 25px rgba(255,214,10,0.25);
 }
 
 /* ================= MOVIE TEXT ================= */
@@ -102,6 +100,17 @@ div[data-baseweb="select"] > div {
     border: 1px solid rgba(255,255,255,0.15);
     border-radius: 18px;
     backdrop-filter: blur(10px);
+    cursor: pointer !important;
+    transition: all 0.3s ease;
+}
+
+div[data-baseweb="select"]:hover > div {
+    border: 1px solid rgba(255,214,10,0.5);
+    box-shadow: 0 0 15px rgba(255,214,10,0.25);
+}
+
+div[data-baseweb="select"] * {
+    cursor: pointer !important;
 }
 
 /* ================= SEARCH BOX ================= */
@@ -122,8 +131,7 @@ div[data-baseweb="select"] > div {
     border-radius: 22px;
     padding: 25px;
     border: 1px solid rgba(255,214,10,0.18);
-    box-shadow:
-        0 10px 30px rgba(0,0,0,0.45);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.45);
 }
 
 /* ================= SIDEBAR ================= */
@@ -150,12 +158,12 @@ section[data-testid="stSidebar"] {
     font-size: 18px;
     font-weight: 800;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .stButton > button:hover {
     transform: scale(1.04);
-    box-shadow:
-        0 0 25px rgba(255,214,10,0.7);
+    box-shadow: 0 0 25px rgba(255,214,10,0.7);
 }
 
 /* ================= IMAGES ================= */
@@ -167,8 +175,7 @@ img {
 
 img:hover {
     transform: scale(1.03);
-    box-shadow:
-        0 0 30px rgba(255,214,10,0.4);
+    box-shadow: 0 0 30px rgba(255,214,10,0.4);
 }
 
 /* ================= ALERT ================= */

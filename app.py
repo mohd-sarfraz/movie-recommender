@@ -34,7 +34,7 @@ st.markdown("""
 /* ================= MAIN CONTAINER ================= */
 
 .block-container {
-    padding-top: 1rem;
+    padding-top: 4.5rem;   /* Changed from 1rem */
     padding-bottom: 2rem;
     max-width: 1300px;
 }
@@ -197,8 +197,7 @@ img:hover {
 footer {
     visibility: hidden;
 }
-            
-            
+
 </style>
 """, unsafe_allow_html=True)
 

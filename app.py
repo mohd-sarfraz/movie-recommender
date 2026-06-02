@@ -220,36 +220,35 @@ st.write("")
 
 # ================= MOVIE SELECTION =================
 
+# ================= MOVIE SELECTION =================
+
 search_movie = st.text_input(
     "🔍 Search Movie",
     placeholder="Type movie name..."
 )
 
-movie_list = movies['title'].values
+movie_list = movies['title'].tolist()
 
 if search_movie:
-
     filtered_movies = [
         movie for movie in movie_list
         if search_movie.lower() in movie.lower()
     ]
-    
 else:
-
     filtered_movies = []
 
-movie_options = ["Select a movie..."] + list(filtered_movies)
+if len(filtered_movies) > 0:
 
-selected_movie = st.selectbox(
-    "🎥 Select a Movie",
-    movie_options
-)
+    selected_movie = st.selectbox(
+        "🎬 Select a Movie",
+        filtered_movies
+    )
 
-if selected_movie == "Select a movie...":
+else:
 
-    st.info("👆 Search and select a movie to get recommendations")
+    selected_movie = None
 
-    st.stop()
+    st.info("💡 Search and select a movie to get recommendations")
 
 # ================= SELECTED MOVIE DETAILS =================
 

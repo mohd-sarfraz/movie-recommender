@@ -6,7 +6,7 @@ import requests
 # ================= PAGE CONFIG =================
 
 st.set_page_config(
-    page_title="Netflix Movie Recommender",
+    page_title="WatchNext | AI Movie Discovery",
     page_icon="🎬",
     layout="wide"
 )
@@ -16,40 +16,57 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-/* Background */
+/* ================= BACKGROUND ================= */
+
 .stApp {
     background: linear-gradient(
         135deg,
-        #000814 0%,
-        #001d3d 40%,
-        #003566 100%
+        #020617 0%,
+        #0f172a 50%,
+        #1e293b 100%
     );
     color: white;
 }
 
-/* Main Container */
+/* ================= MAIN CONTAINER ================= */
+
 .block-container {
     padding-top: 2rem;
     padding-bottom: 2rem;
-    max-width: 1200px;
+    max-width: 1250px;
 }
 
-/* Title */
+/* ================= TITLE ================= */
+
 h1 {
     text-align: center;
     color: #FFD60A;
-    font-size: 4rem !important;
+    font-size: 4.5rem !important;
     font-weight: 900;
-    margin-bottom: 10px;
+    text-shadow: 0 0 25px rgba(255,214,10,0.4);
 }
 
-/* Movie Cards */
+/* ================= MOVIE CARD ================= */
+
+.movie-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 18px;
+    padding: 12px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* ================= MOVIE TEXT ================= */
+
 .movie-title {
     text-align: center;
     font-size: 18px;
     font-weight: 700;
     color: white;
-    margin-top: 10px;
 }
 
 .rating {
@@ -61,34 +78,47 @@ h1 {
 
 .release {
     text-align: center;
-    color: #cbd5e1;
+    color: #CBD5E1;
 }
 
-/* Select Box */
+/* ================= SELECT BOX ================= */
+
 div[data-baseweb="select"] > div {
-    background-color: rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.15);
     border-radius: 15px;
 }
 
-/* Text Input */
+/* ================= SEARCH BOX ================= */
+
 .stTextInput input {
-    background-color: rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.08);
     color: white;
     border-radius: 15px;
     border: 1px solid rgba(255,255,255,0.15);
 }
 
-/* Metrics */
+/* ================= METRIC CARDS ================= */
+
 [data-testid="metric-container"] {
-    background: rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.08);
     border-radius: 20px;
     padding: 20px;
-    border: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,214,10,0.15);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    text-align: center;
 }
 
-/* Buttons */
+/* ================= SIDEBAR ================= */
+
+section[data-testid="stSidebar"] {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(15px);
+    border-right: 1px solid rgba(255,255,255,0.08);
+}
+
+/* ================= BUTTON ================= */
+
 .stButton > button {
     background: linear-gradient(
         90deg,
@@ -99,23 +129,52 @@ div[data-baseweb="select"] > div {
     border: none;
     border-radius: 15px;
     width: 100%;
-    height: 3.3em;
+    height: 3.4em;
     font-size: 18px;
     font-weight: bold;
-    transition: all 0.3s ease;
+    transition: 0.3s;
 }
 
 .stButton > button:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 20px #FFD60A;
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #FFD60A;
 }
 
-/* Images */
+/* ================= IMAGES ================= */
+
 img {
     border-radius: 18px;
+    transition: all 0.3s ease;
 }
 
-/* Footer */
+img:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 25px rgba(255,214,10,0.5);
+}
+
+/* ================= ALERT ================= */
+
+[data-testid="stAlert"] {
+    border-radius: 15px;
+}
+
+/* ================= SCROLLBAR ================= */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #FFD60A;
+    border-radius: 10px;
+}
+
+/* ================= HIDE STREAMLIT ================= */
+
+#MainMenu {
+    visibility: hidden;
+}
+
 footer {
     visibility: hidden;
 }
@@ -125,7 +184,7 @@ footer {
 
 # ================= SIDEBAR =================
 
-st.sidebar.title("🎬 Movie Recommender")
+st.sidebar.title("🎬 WatchNext")
 
 st.sidebar.markdown("""
 ### About Project
@@ -249,17 +308,19 @@ def recommend(movie):
 
 # ================= TITLE =================
 
+# ================= TITLE =================
+
 st.markdown("""
-<h1 style='text-align:center;color:white;font-size:65px;font-weight:800;'>
+<h1 style='text-align:center;color:#FFD60A;font-size:72px;font-weight:900;'>
 🎬 WatchNext
 </h1>
 
-<h3 style='text-align:center;color:#60A5FA;'>
+<h3 style='text-align:center;color:white;font-size:32px;'>
 Your Personal AI Movie Discovery Engine
 </h3>
 
-<p style='text-align:center;font-size:20px;color:#D1D5DB;'>
-Discover hidden gems, blockbuster hits, trailers and personalized recommendations instantly.
+<p style='text-align:center;font-size:20px;color:#CBD5E1;'>
+Explore blockbuster hits, hidden gems, ratings, trailers and personalized recommendations instantly.
 </p>
 """, unsafe_allow_html=True)
 
@@ -340,21 +401,20 @@ st.write("")
 
 # ================= RECOMMEND BUTTON =================
 
-if st.button("🔥 Recommend Similar Movies"):
+if st.button("🍿 Find My Next Movie"):
 
     if selected_movie is None:
         st.warning("⚠️ Please select a movie first.")
         st.stop()
 
-    with st.spinner("Finding Similar Movies..."):
-
+    with st.spinner("🔍 Finding the best movies for you..."):
         recommendations = recommend(selected_movie)
 
     st.subheader(
-        f"🎬 Recommended Movies for '{selected_movie}'"
+        f"✨ Movies You May Love Based On '{selected_movie}'"
     )
 
-    st.write("Total Recommendations:", len(recommendations))
+    st.write(f"🎬 Found {len(recommendations)} recommendations")
 
     col1, col2, col3, col4, col5 = st.columns(5)
 
@@ -364,21 +424,21 @@ if st.button("🔥 Recommend Similar Movies"):
 
         with cols[idx]:
 
+            if idx == 0:
+                st.success("🏆 TOP PICK")
+
             if movie["poster"]:
                 st.image(movie["poster"])
 
             st.markdown(
-                f"<div class='movie-title'>{movie['title']}</div>",
-                unsafe_allow_html=True
-            )
-
-            st.markdown(
-                f"<div class='rating'>🎯 Match {movie['similarity']}%</div>",
-                unsafe_allow_html=True
-            )
-
-            st.markdown(
-                f"<div class='release'>📅 {movie['release']}</div>",
+                f"""
+                <div class='movie-card'>
+                    <div class='movie-title'>{movie['title']}</div>
+                    <div class='rating'>⭐ Rating: {movie['rating']}</div>
+                    <div class='rating'>🎯 Match: {movie['similarity']}%</div>
+                    <div class='release'>📅 {movie['release']}</div>
+                </div>
+                """,
                 unsafe_allow_html=True
             )
 
@@ -395,20 +455,25 @@ if st.button("🔥 Recommend Similar Movies"):
                 "🎬 Details",
                 f"https://www.themoviedb.org/movie/{movie['movie_id']}",
                 use_container_width=True
-            )
-
+          )
 # ================= FOOTER =================
 
-st.write("")
-st.write("")
+st.markdown("""
+<hr>
 
-st.markdown(
-    """
-    <hr>
-    <center>
-    Built with ❤️ by Mohammad Sarfraz Alam |
-    Python • Streamlit • Scikit-Learn • TMDB API
-    </center>
-    """,
-    unsafe_allow_html=True
-)
+<center>
+
+<h3>🎬 WatchNext</h3>
+
+Discover • Watch • Repeat
+
+<br><br>
+
+Built with ❤️ by Mohammad Sarfraz Alam
+
+<br>
+
+Python • Streamlit • Scikit-Learn • TMDB API
+
+</center>
+""", unsafe_allow_html=True)

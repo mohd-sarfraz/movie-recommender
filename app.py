@@ -217,39 +217,12 @@ with col3:
 st.write("")
 
 # ================= MOVIE SELECTION =================
-
-# ================= MOVIE SELECTION =================
-
-# ================= MOVIE SELECTION =================
-
-search_movie = st.text_input(
-    "🔍 Search Movie",
-    placeholder="Type movie name..."
+selected_movie = st.selectbox(
+    "🎬 Select a Movie",
+    movies['title'].values,
+    index=None,
+    placeholder="Search or select a movie..."
 )
-
-movie_list = movies['title'].tolist()
-
-if search_movie:
-    filtered_movies = [
-        movie for movie in movie_list
-        if search_movie.lower() in movie.lower()
-    ]
-else:
-    filtered_movies = []
-
-if len(filtered_movies) > 0:
-
-    selected_movie = st.selectbox(
-        "🎬 Select a Movie",
-        filtered_movies
-    )
-
-else:
-
-    selected_movie = None
-
-    st.info("💡 Search and select a movie to get recommendations")
-
 # ================= SELECTED MOVIE DETAILS =================
 
 try:
@@ -304,6 +277,10 @@ st.write("")
 # ================= RECOMMEND BUTTON =================
 
 if st.button("🔥 Recommend Similar Movies"):
+
+    if selected_movie is None:
+        st.warning("⚠️ Please select a movie first.")
+        st.stop()
 
     with st.spinner("Finding Similar Movies..."):
 

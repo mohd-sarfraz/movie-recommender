@@ -16,24 +16,27 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-/* ================= BACKGROUND ================= */
+/* ================= CINEMATIC BACKGROUND ================= */
 
 .stApp {
-    background: linear-gradient(
-        135deg,
-        #020617 0%,
-        #0f172a 50%,
-        #1e293b 100%
-    );
+    background:
+    linear-gradient(
+        rgba(2,6,23,0.92),
+        rgba(2,6,23,0.96)
+    ),
+    url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     color: white;
 }
 
 /* ================= MAIN CONTAINER ================= */
 
 .block-container {
-    padding-top: 2rem;
+    padding-top: 1rem;
     padding-bottom: 2rem;
-    max-width: 1250px;
+    max-width: 1300px;
 }
 
 /* ================= TITLE ================= */
@@ -41,23 +44,34 @@ st.markdown("""
 h1 {
     text-align: center;
     color: #FFD60A;
-    font-size: 4.5rem !important;
+    font-size: 4rem !important;
     font-weight: 900;
-    text-shadow: 0 0 25px rgba(255,214,10,0.4);
+    text-shadow:
+        0 0 15px rgba(255,214,10,0.6),
+        0 0 40px rgba(255,214,10,0.3);
 }
 
 /* ================= MOVIE CARD ================= */
 
 .movie-card {
     background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(20px);
     border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 18px;
-    padding: 12px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    border-radius: 20px;
+    padding: 15px;
+    margin-top: 12px;
+    margin-bottom: 12px;
     text-align: center;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.4);
+    transition: all 0.3s ease;
+}
+
+.movie-card:hover {
+    transform: translateY(-5px);
+    border: 1px solid rgba(255,214,10,0.4);
+    box-shadow:
+        0 0 25px rgba(255,214,10,0.25);
 }
 
 /* ================= MOVIE TEXT ================= */
@@ -86,7 +100,8 @@ h1 {
 div[data-baseweb="select"] > div {
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 15px;
+    border-radius: 18px;
+    backdrop-filter: blur(10px);
 }
 
 /* ================= SEARCH BOX ================= */
@@ -94,26 +109,28 @@ div[data-baseweb="select"] > div {
 .stTextInput input {
     background: rgba(255,255,255,0.08);
     color: white;
-    border-radius: 15px;
+    border-radius: 18px;
     border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
 }
 
 /* ================= METRIC CARDS ================= */
 
 [data-testid="metric-container"] {
     background: rgba(255,255,255,0.08);
-    border-radius: 20px;
-    padding: 20px;
-    border: 1px solid rgba(255,214,10,0.15);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-    text-align: center;
+    backdrop-filter: blur(20px);
+    border-radius: 22px;
+    padding: 25px;
+    border: 1px solid rgba(255,214,10,0.18);
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.45);
 }
 
 /* ================= SIDEBAR ================= */
 
 section[data-testid="stSidebar"] {
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(15px);
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(20px);
     border-right: 1px solid rgba(255,255,255,0.08);
 }
 
@@ -127,17 +144,18 @@ section[data-testid="stSidebar"] {
     );
     color: black;
     border: none;
-    border-radius: 15px;
+    border-radius: 18px;
     width: 100%;
-    height: 3.4em;
+    height: 3.5em;
     font-size: 18px;
-    font-weight: bold;
-    transition: 0.3s;
+    font-weight: 800;
+    transition: all 0.3s ease;
 }
 
 .stButton > button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px #FFD60A;
+    transform: scale(1.04);
+    box-shadow:
+        0 0 25px rgba(255,214,10,0.7);
 }
 
 /* ================= IMAGES ================= */
@@ -148,8 +166,9 @@ img {
 }
 
 img:hover {
-    transform: scale(1.04);
-    box-shadow: 0 0 25px rgba(255,214,10,0.5);
+    transform: scale(1.03);
+    box-shadow:
+        0 0 30px rgba(255,214,10,0.4);
 }
 
 /* ================= ALERT ================= */
@@ -176,6 +195,10 @@ img:hover {
 }
 
 footer {
+    visibility: hidden;
+}
+
+header {
     visibility: hidden;
 }
 
@@ -306,25 +329,64 @@ def recommend(movie):
 
     return recommendations
 
-# ================= TITLE =================
+
 
 # ================= TITLE =================
 
 st.markdown("""
-<h1 style='text-align:center;color:#FFD60A;font-size:72px;font-weight:900;'>
+<div style="
+background: rgba(255,255,255,0.08);
+backdrop-filter: blur(20px);
+padding:40px;
+border-radius:25px;
+border:1px solid rgba(255,214,10,0.15);
+box-shadow:0 10px 40px rgba(0,0,0,0.4);
+text-align:center;
+margin-bottom:30px;
+">
+
+<h1 style="
+color:#FFD60A;
+font-size:75px;
+font-weight:900;
+margin-bottom:5px;
+text-shadow:0 0 25px rgba(255,214,10,0.5);
+">
 🎬 WatchNext
 </h1>
 
-<h3 style='text-align:center;color:white;font-size:32px;'>
+<h3 style="
+color:white;
+font-size:34px;
+font-weight:700;
+margin-bottom:15px;
+">
 Your Personal AI Movie Discovery Engine
 </h3>
 
-<p style='text-align:center;font-size:20px;color:#CBD5E1;'>
+<p style="
+font-size:20px;
+color:#CBD5E1;
+max-width:900px;
+margin:auto;
+">
 Explore blockbuster hits, hidden gems, ratings, trailers and personalized recommendations instantly.
 </p>
+
+<br>
+
+<p style="
+font-size:18px;
+color:#FFD60A;
+font-weight:bold;
+">
+✨ Search • Discover • Watch • Repeat ✨
+</p>
+
+</div>
 """, unsafe_allow_html=True)
 
-st.write("")
+
 
 # ================= DASHBOARD STATS =================
 
@@ -363,9 +425,28 @@ try:
     with col_left:
 
         if selected_movie_data["poster"]:
+
+            st.markdown(
+                """
+                <div style="
+                background:rgba(255,255,255,0.08);
+                backdrop-filter:blur(20px);
+                padding:15px;
+                border-radius:25px;
+                border:1px solid rgba(255,214,10,0.15);
+                ">
+                """,
+                unsafe_allow_html=True
+            )
+
             st.image(
                 selected_movie_data["poster"],
-                width=300
+                use_container_width=True
+            )
+
+            st.markdown(
+                "</div>",
+                unsafe_allow_html=True
             )
 
     with col_right:
@@ -399,63 +480,7 @@ except Exception:
 
 st.write("")
 
-# ================= RECOMMEND BUTTON =================
 
-if st.button("🍿 Find My Next Movie"):
-
-    if selected_movie is None:
-        st.warning("⚠️ Please select a movie first.")
-        st.stop()
-
-    with st.spinner("🔍 Finding the best movies for you..."):
-        recommendations = recommend(selected_movie)
-
-    st.subheader(
-        f"✨ Movies You May Love Based On '{selected_movie}'"
-    )
-
-    st.write(f"🎬 Found {len(recommendations)} recommendations")
-
-    col1, col2, col3, col4, col5 = st.columns(5)
-
-    cols = [col1, col2, col3, col4, col5]
-
-    for idx, movie in enumerate(recommendations):
-
-        with cols[idx]:
-
-            if idx == 0:
-                st.success("🏆 TOP PICK")
-
-            if movie["poster"]:
-                st.image(movie["poster"])
-
-            st.markdown(
-                f"""
-                <div class='movie-card'>
-                    <div class='movie-title'>{movie['title']}</div>
-                    <div class='rating'>⭐ Rating: {movie['rating']}</div>
-                    <div class='rating'>🎯 Match: {movie['similarity']}%</div>
-                    <div class='release'>📅 {movie['release']}</div>
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
-
-            trailer_url = fetch_trailer(movie["movie_id"])
-
-            if trailer_url:
-                st.link_button(
-                    "▶️ Trailer",
-                    trailer_url,
-                    use_container_width=True
-                )
-
-            st.link_button(
-                "🎬 Details",
-                f"https://www.themoviedb.org/movie/{movie['movie_id']}",
-                use_container_width=True
-          )
 # ================= FOOTER =================
 
 st.markdown("""

@@ -24,7 +24,7 @@ st.markdown("""
         rgba(2,6,23,0.75),
         rgba(2,6,23,0.85)
     ),
-    url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba");
+    url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba")
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

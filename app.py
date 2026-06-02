@@ -21,10 +21,8 @@ st.markdown("""
 .stApp {
     background:
     linear-gradient(
-    linear-gradient(
-rgba(2,6,23,0.75)
-rgba(2,6,23,0.85)
-)
+        rgba(2,6,23,0.75),
+        rgba(2,6,23,0.85)
     ),
     url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba");
     background-size: cover;
@@ -32,7 +30,8 @@ rgba(2,6,23,0.85)
     background-attachment: fixed;
     color: white;
 }
-
+            
+        
 /* ================= MAIN CONTAINER ================= */
 
 .block-container {
